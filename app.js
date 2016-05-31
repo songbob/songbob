@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
 /*
  *  DB connect 부분(시스템_환경변수로 path설정전 연결)
  *  이렇게 할 때 github에 free로 공유되어 db를 남이 건드릴 수 있음
