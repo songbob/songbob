@@ -74,9 +74,9 @@ app.use(bodyParser.json());
 
 //set routes
 app.get('/posts', function(req,res) {
-	Post.find({}, function(err,posts){
+	Post.find({}).sort('-createdAt').exec(function(err,posts){
 		if(err) return res.json({success:false, message:err});
-		res.json({success:true, data:posts});
+		res.render("posts/index", {data:posts});
 	});
 }); //index
 app.post('/posts', function(req,res){
@@ -177,3 +177,21 @@ function getCounter(res){
 app.listen(3000, function(){
 	console.log('Server On!');
 });
+
+/*
+ *  REST client를 사용하여 데이터 다수 생성
+ *{
+    "post":[{
+        "title":"Test Title 1",
+        "body" :"Test Body 1"
+    },
+    {
+        "title":"Test Title 2",
+        "body" :"Test Body 2"
+    },
+    {
+        "title":"Test Title 3",
+        "body" :"Test Body 3"
+    }
+    ]
+}*/
