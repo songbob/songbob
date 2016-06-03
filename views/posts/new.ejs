@@ -15,11 +15,11 @@
 <!-- views/posts/index.ejs -->
 <div class="new">
 	<h3>New Post</h3>
-	<form calss="posts_form" action="/post" method="post">
+	<form calss="posts_form" action="/posts" method="post">
 		<label>Title</label>
 		<input type="text" name="post[title]" value="">
 		<label>Body</label>
-		<textarea rows="" cols="" name="post[body]"></textarea>
+		<textarea name="post[body]"></textarea>
 		<button type="submit">Submit</button>
 	</form>
 	<a href="/posts"><button>Back</button></a>

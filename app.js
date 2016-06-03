@@ -89,7 +89,7 @@ app.post('/posts', function(req,res){
 	Post.create(req.body.post, function(err,post){
 		if(err) return res.json({success:false, message:err});
 		/*res.json({success:true, data:post});*/
-		res.redirect('posts');
+		res.redirect('/posts');
 	});
 }); //create
 app.get('/posts/:id', function(req,res){
