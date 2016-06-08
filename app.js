@@ -71,7 +71,7 @@ var postSchema = mongoose.Schema({
 });
 var Post = mongoose.model('post', postSchema);
 
-var userSchema = mongoose.model('post', postSchema({
+var userSchema = mongoose.Schema({
 	email : {type:String, required:true, unique:true},
 	nikname : {type:String, required:true, unique:true},
 	password : {type:String, required:true},
@@ -88,7 +88,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
-app.use(flash())l
+app.use(flash());
 
 app.use(session({secret:'MySecret'}));
 app.use(passport.initialize());
@@ -133,7 +133,7 @@ app.get('/', function(req, res){
 	res.redirect('/posts');
 });
 app.get('/login', function(req,res){
-	res.render('login/login', {email:req.flash("email")[0], loginError:req.flash('loginError')}
+	res.render('login/login', {email:req.flash("email")[0], loginError:req.flash('loginError')})
 });
 app.post('/login',
 		function(req, res, next){
@@ -155,8 +155,8 @@ app.get('/logout', function(req,res){
 	req.logout();
 	res.redirect('/');
 });
-app.get('/user/new', function(req,res){
-		res.render('user/new', {
+app.get('/users/new', function(req,res){
+		res.render('users/new', {
 			formData : req.falsh('formData'[0]),
 			emailError : req.flash('emailError'[0]),
 			nacknameError : req.flash('nicknameError'[0]),
@@ -188,7 +188,7 @@ app.get('/users/:id/edit', function(req, res){
 		);
 	});
 }); //edit
-app.put('/users/:id', checkUserRegVaildation, function(req, res){
+app.put('/users/:id', checkUserRegValidation, function(req, res){
 	User.findById(req.params.id, req.body.user, function(err,user){
 		if(err) return res.json({success:"false", message:err});
 		if(req.body.user.password == user.password){
@@ -324,10 +324,10 @@ function getCounter(res){
 }*/
 
 //functions
-function checkUserRegVaildation(req, res, next){
+function checkUserRegValidation(req, res, next){
 	var isValid = true;
 	
-	async.waterfall{
+	async.waterfall(
 		[function(callback){
 			User.findOne({email : req.body.user.email, _id : {$ne : mongoose.Types.ObjectId(req.params.id)}},
 				function(err, user){
@@ -337,7 +337,7 @@ function checkUserRegVaildation(req, res, next){
 				}
 				callback(null, isValid);
 			}
-		};
+		);
 	}, function(isValid, callback){
 		User.findOne({nickname : req.body.user.nickname, _id : {$ne : mongoose.Types.ObjectId(req.params.id)}},
 				function(err, user){
@@ -347,7 +347,7 @@ function checkUserRegVaildation(req, res, next){
 					}
 					callback(null, isValid);
 		}
-	};
+	);
 }], function(err, isValid){
 			if(err) return res.json({success:"false", message:err});
 			if(isValid){
@@ -357,7 +357,7 @@ function checkUserRegVaildation(req, res, next){
 				res.redirect("back");
 			}
 		}
-	};
+	);
 }
 
 //start server
