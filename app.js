@@ -73,7 +73,7 @@ var Post = mongoose.model('post', postSchema);
 
 var userSchema = mongoose.Schema({
 	email : {type:String, required:true, unique:true},
-	nikname : {type:String, required:true, unique:true},
+	nickname : {type:String, required:true, unique:true},
 	password : {type:String, required:true},
 	createAt : {type:Date, default:Date.now}
 });
