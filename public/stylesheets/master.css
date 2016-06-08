@@ -46,6 +46,10 @@ footer{
 .posts .index ul li:nth-child(odd){
   background-color: #75CEF7;
 }
+.posts .index ul li>span{
+	width: 90px;
+	float: right;
+}
 .posts .index ul li:nth-child(even){
   background-color: #A8D8EF;
 }
