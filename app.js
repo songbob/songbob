@@ -157,10 +157,10 @@ app.get('/logout', function(req,res){
 });
 app.get('/users/new', function(req,res){
 		res.render('users/new', {
-			formData : req.falsh('formData'[0]),
-			emailError : req.flash('emailError'[0]),
-			nacknameError : req.flash('nicknameError'[0]),
-			passwordError : req.flash('passwordError'[0])
+			formData : req.flash('formData')[0],
+			emailError : req.flash('emailError')[0],
+			nacknameError : req.flash('nicknameError')[0],
+			passwordError : req.flash('passwordError')[0]
 		}
 	);
 }); //new
