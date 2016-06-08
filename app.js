@@ -138,7 +138,7 @@ app.get('/login', function(req,res){
 app.post('/login',
 		function(req, res, next){
 	req.flash("email"); // flush email data
-	if(req.body.email.lengh === 0 || req.body.password.lengh === 0){
+	if(req.body.email.length === 0 || req.body.password.length === 0){
 		req.flash("email", req.body.email);
 		req.flash("loginError", "Please enter both email and psaaword.");
 		res.redirect('/login');
@@ -156,14 +156,14 @@ app.get('/logout', function(req,res){
 	res.redirect('/');
 });
 app.get('/users/new', function(req,res){
-		res.render('users/new', {
-			formData : req.flash('formData')[0],
-			emailError : req.flash('emailError')[0],
-			nacknameError : req.flash('nicknameError')[0],
-			passwordError : req.flash('passwordError')[0]
-		}
-	);
-}); //new
+	  res.render("users/new", {
+          formData: req.flash('formData')[0],
+          emailError: req.flash('emailError')[0],
+          nicknameError: req.flash('nicknameError')[0],
+          passwordError: req.flash('passwordError')[0]
+        }
+);
+}); // new
 app.post('/users', checkUserRegValidation, function(req, res, next){
 	User.create(req.body.user, function(err, user){
 		if(err) return res.json({success:false, message:err});
