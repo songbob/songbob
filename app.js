@@ -90,7 +90,7 @@ userSchema.pre("save", function(next){
 });
 userSchema.methods.authenticate = function(password){
 	var user = this;
-	return bcrypt.compareSync(password, user, password);
+	return bcrypt.compareSync(password, user.password);
 };
 userSchema.methods.hash = function(password){
 	return bcrypt.hashSync(password);
