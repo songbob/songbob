@@ -138,6 +138,8 @@ app.get('/login', function(req,res){
 app.post('/login',
 		function(req, res, next){
 	req.flash("email"); // flush email data
+	/*console.log("EEEEEEEEEEEEE"+req.body.email.length);
+	console.log("PPPPPPPPPPPPP"+req.body.password.length);*/
 	if(req.body.email.length === 0 || req.body.password.length === 0){
 		req.flash("email", req.body.email);
 		req.flash("loginError", "Please enter both email and psaaword.");
