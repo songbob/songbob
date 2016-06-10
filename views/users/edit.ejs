@@ -18,9 +18,9 @@
     <input type="text" id="password" name="user[password]" value="">
     <hr><br>
     <label>Email* <span id="email_error" class="error_message"><%= emailError?emailError:"" %></span></label>
-    <input type="text" id="email" name="user[email]" value="<%= formData?formData.email:(user?user.email:'') %>">
+    <input type="text" id="email" name="user[email]" value="<%= formData?formData.email:(user?user.email:"") %>">
     <label>Nickname* <span id="nickname_error" class="error_message"><%= nicknameError?nicknameError:"" %></span></label>
-    <input type="text" id="nickname" name="user[nickname]" value="<%= formData?formData.nickname:(user?user.nickname:'') %>">
+    <input type="text" id="nickname" name="user[nickname]" value="<%= formData?formData.nickname:(user?user.nickname:"") %>">
     <label>New Password</label>
     <input type="text" id="new_password" name="user[newPassword]" value="">
     <label>Password Confirmation <span id="password_confirmation_error" class="error_message"></span></label>
