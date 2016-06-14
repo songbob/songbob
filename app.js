@@ -250,7 +250,7 @@ app.post('/posts', isLoggedIn, function(req,res){
 	});
 }); //create
 app.get('/posts/:id', function(req,res){
-	Post.findById(req.params.id).poppulate("author").exec(function(err,post){
+	Post.findById(req.params.id).populate("author").exec(function(err,post){
 		if(err) return res.json({success:false, message:err});
 		/*res.json({success:true, data:post});*/
 		res.render("posts/show", {data:post, user:req.user});
