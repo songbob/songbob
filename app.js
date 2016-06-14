@@ -233,7 +233,7 @@ app.put('/users/:id', isLoggedIn, checkUserRegValidation, function(req,res){
 
 //게시판
 app.get('/posts', function(req,res) {
-	Post.find({}).sort('-createdAt').exec(function(err,posts){
+	Post.find({}).populate("author").sort('-createdAt').exec(function(err,posts){
 		if(err) return res.json({success:false, message:err});
 		res.render("posts/index", {data:posts, user:req.user});
 	});
