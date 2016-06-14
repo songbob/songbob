@@ -67,6 +67,7 @@ console.log(__dirname);*/
 var postSchema = mongoose.Schema({
 	title : {type:String, required:true},
 	body : {type:String, required:true},
+	author : {type:mongoose.Schema.Type.ObjectId, ref:'user', required:true},
 	createdAt : {type:Date, default:Date.now},
 	updatedAt : Date
 });
@@ -237,10 +238,11 @@ app.get('/posts', function(req,res) {
 		res.render("posts/index", {data:posts, user:req.user});
 	});
 }); //index
-app.get('/posts/new', function(req,res){
-	res.render("posts/new");
+app.get('/posts/new', isLoggedIn, function(req,res){
+	res.render("posts/new", {user:req.user});
 }); //new
-app.post('/posts', function(req,res){
+app.post('/posts', isLoggedIn, function(req,res){
+	req.body.post.author=req.user._id;
 	Post.create(req.body.post, function(err,post){
 		if(err) return res.json({success:false, message:err});
 		/*res.json({success:true, data:post});*/
