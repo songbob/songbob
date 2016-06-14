@@ -253,7 +253,7 @@ app.get('/posts/:id', function(req,res){
 	Post.findById(req.params.id).poppulate("author").exec(function(err,post){
 		if(err) return res.json({success:false, message:err});
 		/*res.json({success:true, data:post});*/
-		res.render("posts/show", {data:post}, user:req.user);
+		res.render("posts/show", {data:post, user:req.user});
 	});
 }); //show
 app.get('/posts/:id/edit', function(req,res){
