@@ -78,7 +78,6 @@ var userSchema = mongoose.Schema({
 	password : {type:String, required:true},
 	createAt : {type:Date, default:Date.now}
 });
-var User = mongoose.model('user', userSchema);
 userSchema.pre("save", function(next){
 	var user = this;
 	if(!user.isModified("password")){
@@ -88,13 +87,14 @@ userSchema.pre("save", function(next){
 		return next();
 	}
 });
-userSchema.methods.authenticate = function(password){
-	var user = this;
-	return bcrypt.compareSync(password, user.password);
-};
+userSchema.methods.authenticate = function (password) {
+	  var user = this;
+	  return bcrypt.compareSync(password,user.password);
+	};
 userSchema.methods.hash = function(password){
 	return bcrypt.hashSync(password);
 };
+var User = mongoose.model('user', userSchema);
 
 //view setting
 app.set("view engine", 'ejs');
@@ -129,7 +129,7 @@ passport.use('local-login',
 			User.findOne({'email':email}, function(err, user){
 				if(err) return done(err);
 				
-				if (!user){
+				if(!user){
 					req.flash("email", req.body.email);
 					return done(null, false, req.flash('loginError', 'No user found.'));
 				}
