@@ -270,9 +270,9 @@ app.put('/posts/:id', isLoggedIn, function(req,res){
 		if(!req.user._id.equals(post.author)) return res.json({success:false, message:"Unauthrized Attempt"});
 		Post.findByIdAndUpdate(req.params.id, req.body.post, function(err,post){
 		if(err) return res.json({success:false, message:err});
-		}
 		/*res.json({success:true, message:post._id+" updated"});*/
 		res.redirect('/posts/'+req.params.id);
+		});
 	});
 }); //update
 app.delete('/posts/:id', isLoggedIn, function(req,res){
@@ -283,6 +283,7 @@ app.delete('/posts/:id', isLoggedIn, function(req,res){
 		if(err) return res.json({success:false, message:err});
 		/*res.json({success:true, message:post._id+" deleted"});*/
 		res.redirect('/posts');
+		});
 	});
 }); //destroy
 
